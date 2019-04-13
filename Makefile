@@ -35,14 +35,28 @@ PROJ_OBJ		=		$(PROJ_SRC:.c=.o)
 TEST_OBJ		=		$(TEST_SRC:.c=.o)
 
 INCLUDE_DIR		=		"include/"
-LIB_DIR			=		"lib/my/"
+LIB_DIR			=		"lib/"
+JSON_C_DIR		=		"lib/jsonc/"
 
 CFLAGS			+=		-I $(INCLUDE_DIR)
 CFLAGS			+=		-W -Wall -Wextra
+CFLAGS			+=		-I $(JSON_C_DIR)/include/json-c
 
-LDLIBS			+=		-ljson-c
+LDFLAGS			+=		-L $(JSON_C_DIR)/lib -ljson-c
 
-all:			$(NAME)
+all:			json_make $(NAME)
+
+.ONESHELL:
+json_make:
+				cd $(LIB_DIR)
+				git clone https://github.com/json-c/json-c.git
+				mv json-c jsonc
+				cd jsonc
+				mkdir build
+				cd build
+				cmake ..
+				make
+				cd ..
 
 $(NAME):		$(MAIN_OBJ) $(PROJ_OBJ)
 				$(CC) $(MAIN_OBJ) $(PROJ_OBJ) -o $(NAME) $(CFLAGS) $(LDFLAGS) $(LDLIBS)
