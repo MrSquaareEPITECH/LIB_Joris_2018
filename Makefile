@@ -22,6 +22,7 @@ PROJ_SRC		=		my_jsonc.c					\
 						getters/get_string.c		\
 						lib/str_count.c				\
 						lib/str_cpy.c				\
+						lib/str_free.c				\
 						lib/str_len.c				\
 						lib/str_split.c				\
 						loaders/json_loaders.c		\
@@ -44,17 +45,11 @@ CFLAGS			+=		-I $(JSON_C_DIR)
 
 LDFLAGS			+=		-L $(JSON_C_DIR) -ljson-c
 
-all:			json_make $(NAME)
+all:			json_c_build $(NAME)
 
 .ONESHELL:
-json_make:
-				cd $(LIB_DIR)
-				git clone https://github.com/json-c/json-c.git
-				cd json-c
-				sh autogen.sh
-				./configure
-				cmake -DBUILD_SHARED_LIBS=OFF .
-				make
+json_c_build:
+				bash "scripts/build_json_c.sh"
 
 $(NAME):		$(MAIN_OBJ) $(PROJ_OBJ)
 				$(CC) $(MAIN_OBJ) $(PROJ_OBJ) -o $(NAME) $(CFLAGS) $(LDFLAGS) $(LDLIBS)
@@ -64,6 +59,7 @@ clean:
 
 fclean:			clean
 				$(RM) $(NAME)
+				$(RM) $(JSON_C_DIR)
 
 re:				fclean all
 
