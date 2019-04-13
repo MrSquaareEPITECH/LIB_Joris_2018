@@ -5,10 +5,10 @@
 ** LIB_MyJSONC_2018
 */
 
-int my_json(void);
+int my_jsonc(void);
 
 int main(void)
 {
-    my_json();
+    my_jsonc();
     return (0);
 }

@@ -15,6 +15,17 @@ RM				=		rm -rf
 MAIN_SRC		=		main.c
 
 PROJ_SRC		=		my_jsonc.c					\
+						getters/get_array.c			\
+						getters/get_double.c		\
+						getters/get_int.c			\
+						getters/get_object.c		\
+						getters/get_string.c		\
+						lib/str_count.c				\
+						lib/str_cpy.c				\
+						lib/str_free.c				\
+						lib/str_len.c				\
+						lib/str_split.c				\
+						loaders/json_loaders.c		\
 
 TEST_SRC		=		tests/test_src.c			\
 
@@ -25,12 +36,20 @@ PROJ_OBJ		=		$(PROJ_SRC:.c=.o)
 TEST_OBJ		=		$(TEST_SRC:.c=.o)
 
 INCLUDE_DIR		=		"include/"
-LIB_DIR			=		"lib/my/"
+LIB_DIR			=		"lib/"
+JSON_C_DIR		=		"lib/json-c/"
 
 CFLAGS			+=		-I $(INCLUDE_DIR)
 CFLAGS			+=		-W -Wall -Wextra
+CFLAGS			+=		-I $(JSON_C_DIR)
 
-all:			$(NAME)
+LDFLAGS			+=		-L $(JSON_C_DIR) -ljson-c
+
+all:			json_c_build $(NAME)
+
+.ONESHELL:
+json_c_build:
+				bash "scripts/build_json_c.sh"
 
 $(NAME):		$(MAIN_OBJ) $(PROJ_OBJ)
 				$(CC) $(MAIN_OBJ) $(PROJ_OBJ) -o $(NAME) $(CFLAGS) $(LDFLAGS) $(LDLIBS)
@@ -40,6 +59,7 @@ clean:
 
 fclean:			clean
 				$(RM) $(NAME)
+				$(RM) $(JSON_C_DIR)
 
 re:				fclean all
 
