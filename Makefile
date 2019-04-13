@@ -16,7 +16,7 @@ MAIN_SRC		=		main.c
 
 PROJ_SRC		=		my_jsonc.c					\
 						getters/get_array.c			\
-						getters/get_float.c			\
+						getters/get_double.c		\
 						getters/get_int.c			\
 						getters/get_object.c		\
 						getters/get_string.c		\
