@@ -8,7 +8,7 @@
 #ifndef LIB_MYJSONC_2018_MY_JSON_H
 #define LIB_MYJSONC_2018_MY_JSON_H
 
-#include <json-c/json.h>
+#include <json.h>
 
 // Getters
 json_object *get_object(json_object *json, char **array, int index);

@@ -6,7 +6,7 @@
 */
 
 #include <stdio.h>
-#include <json-c/json.h>
+#include <json.h>
 #include "lib.h"
 #include "my_jsonc.h"
 

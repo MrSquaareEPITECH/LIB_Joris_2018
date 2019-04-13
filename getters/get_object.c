@@ -5,7 +5,7 @@
 ** LIB_MyJSONC_2018
 */
 
-#include <json-c/json.h>
+#include <json.h>
 #include "my_jsonc.h"
 
 json_object *get_object(json_object *json, char **array, int index)

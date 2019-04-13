@@ -5,9 +5,9 @@
 ** LIB_MyJSONC_2018
 */
 
-#include <json-c/json.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <json.h>
 #include <unistd.h>
 #include "my_jsonc.h"
 

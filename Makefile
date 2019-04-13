@@ -36,13 +36,13 @@ TEST_OBJ		=		$(TEST_SRC:.c=.o)
 
 INCLUDE_DIR		=		"include/"
 LIB_DIR			=		"lib/"
-JSON_C_DIR		=		"lib/jsonc/"
+JSON_C_DIR		=		"lib/json-c/"
 
 CFLAGS			+=		-I $(INCLUDE_DIR)
 CFLAGS			+=		-W -Wall -Wextra
-CFLAGS			+=		-I $(JSON_C_DIR)/include/json-c
+CFLAGS			+=		-I $(JSON_C_DIR)
 
-LDFLAGS			+=		-L $(JSON_C_DIR)/lib -ljson-c
+LDFLAGS			+=		-L $(JSON_C_DIR) -ljson-c
 
 all:			json_make $(NAME)
 
@@ -50,13 +50,11 @@ all:			json_make $(NAME)
 json_make:
 				cd $(LIB_DIR)
 				git clone https://github.com/json-c/json-c.git
-				mv json-c jsonc
-				cd jsonc
-				mkdir build
-				cd build
-				cmake ..
+				cd json-c
+				sh autogen.sh
+				./configure
+				cmake -DBUILD_SHARED_LIBS=OFF .
 				make
-				cd ..
 
 $(NAME):		$(MAIN_OBJ) $(PROJ_OBJ)
 				$(CC) $(MAIN_OBJ) $(PROJ_OBJ) -o $(NAME) $(CFLAGS) $(LDFLAGS) $(LDLIBS)
