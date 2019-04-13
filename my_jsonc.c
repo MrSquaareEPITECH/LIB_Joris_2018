@@ -13,9 +13,15 @@
 int my_jsonc(void)
 {
     json_object *file = json_load("tests/data/data.json");
-    char **array = str_split("window.title", ".");
-    json_object *title = get_object(file, array, 0);
+    void **array = json_get_array(file, "parent.child.array");
+    double dbl = json_get_double(file, "parent.child.double");
+    int itg = json_get_int(file, "parent.child.int");
+    char *string = json_get_string(file, "parent.child.string");
 
-    printf("title: %s" "\n", json_object_get_string(title));
+    for (int i = 0; array[i] != NULL; ++i)
+        printf("array[%d]: %p" "\n", i, array[i]);
+    printf("double: %lf" "\n", dbl);
+    printf("int: %d" "\n", itg);
+    printf("string: %s" "\n", string);
     return (0);
 }

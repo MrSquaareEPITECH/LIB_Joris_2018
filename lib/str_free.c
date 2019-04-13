@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2019
 ** str_free.c
 ** File description:
-** PSU_minishell2_2018
+** LIB_MyJSONC_2018
 */
 
 #include <stdlib.h>

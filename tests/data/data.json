@@ -1,0 +1,10 @@
+{
+  "parent": {
+    "child" : {
+      "array": [1, 2],
+      "double": 3.14,
+      "int": 10,
+      "string": "Hello, world!"
+    }
+  }
+}
