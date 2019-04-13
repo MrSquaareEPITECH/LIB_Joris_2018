@@ -5,3 +5,7 @@
 ** LIB_MyJSONC_2018
 */
 
+int my_json(void)
+{
+    return (0);
+}
