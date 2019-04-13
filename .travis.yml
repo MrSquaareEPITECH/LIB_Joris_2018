@@ -13,6 +13,8 @@ notifications:
 
 stages:
   - build
+  - name: test
+    if: true = false
   - name: deploy
     if: branch = master
 
