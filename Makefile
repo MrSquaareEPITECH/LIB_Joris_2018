@@ -15,6 +15,16 @@ RM				=		rm -rf
 MAIN_SRC		=		main.c
 
 PROJ_SRC		=		my_jsonc.c					\
+						getters/get_array.c			\
+						getters/get_float.c			\
+						getters/get_int.c			\
+						getters/get_object.c		\
+						getters/get_string.c		\
+						lib/str_count.c				\
+						lib/str_cpy.c				\
+						lib/str_len.c				\
+						lib/str_split.c				\
+						loaders/json_loaders.c		\
 
 TEST_SRC		=		tests/test_src.c			\
 
@@ -29,6 +39,8 @@ LIB_DIR			=		"lib/my/"
 
 CFLAGS			+=		-I $(INCLUDE_DIR)
 CFLAGS			+=		-W -Wall -Wextra
+
+LDLIBS			+=		-ljson-c
 
 all:			$(NAME)
 
