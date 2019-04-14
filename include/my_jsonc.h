@@ -20,4 +20,12 @@ char *json_get_string(json_object *file, char *target);
 // File
 void json_create(char *filepath, json_object *file);
 json_object *json_load(char *path);
+
+// Setters
+void json_set_int(json_object *file, char *target, char *key, int value);
+void json_set_double(json_object *file, char *target, char *key, double value);
+void json_set_array(json_object *file, char *target, char *key);
+void json_set_string(json_object *file, char *target, char *key, const char
+*string);
+
 #endif //LIB_MYJSONC_2018_MY_JSON_H
