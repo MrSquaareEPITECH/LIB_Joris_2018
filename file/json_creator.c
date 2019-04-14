@@ -14,7 +14,7 @@
 #include "lib.h"
 #include "my_jsonc.h"
 
-void json_creator(char *filepath, json_object *file)
+void json_create(char *filepath, json_object *file)
 {
     int fd = 0;
     const char *json_string = NULL;

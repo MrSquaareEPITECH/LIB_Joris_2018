@@ -17,9 +17,7 @@ int json_get_int(json_object *file, char *target);
 json_object *json_get_object(json_object *json, char **array, int index);
 char *json_get_string(json_object *file, char *target);
 
-// Loaders
+// File
+void json_create(char *filepath, json_object *file);
 json_object *json_load(char *path);
-
-// Creators
-void json_creator(char *filepath, json_object *file);
 #endif //LIB_MYJSONC_2018_MY_JSON_H

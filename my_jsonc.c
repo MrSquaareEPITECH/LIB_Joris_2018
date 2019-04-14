@@ -18,7 +18,7 @@ int my_jsonc(void)
     double dbl = json_get_double(file, "parent.child.double");
     int itg = json_get_int(file, "parent.child.int");
     char *string = json_get_string(file, "parent.child.string");
-    json_creator("tests/data/create.json", file);
+    json_create("tests/data/create.json", file);
 
     for (int i = 0; array[i] != NULL; ++i)
         printf("array[%d]: %s" "\n", i, json_object_get_string(array[i]));
