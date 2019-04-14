@@ -20,4 +20,6 @@ char *json_get_string(json_object *file, char *target);
 // Loaders
 json_object *json_load(char *path);
 
+// Creators
+void json_creator(char *filepath, json_object *file);
 #endif //LIB_MYJSONC_2018_MY_JSON_H

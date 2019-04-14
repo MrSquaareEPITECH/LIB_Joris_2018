@@ -26,6 +26,7 @@ PROJ_SRC		=		my_jsonc.c					\
 						lib/str_len.c				\
 						lib/str_split.c				\
 						loaders/json_loaders.c		\
+						creators/json_creator.c		\
 
 TEST_SRC		=		tests/test_src.c			\
 
