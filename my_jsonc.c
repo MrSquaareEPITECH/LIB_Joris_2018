@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <json.h>
 #include "lib.h"
+#include <stdlib.h>
 #include "my_jsonc.h"
 
 int my_jsonc(void)
@@ -17,9 +18,10 @@ int my_jsonc(void)
     double dbl = json_get_double(file, "parent.child.double");
     int itg = json_get_int(file, "parent.child.int");
     char *string = json_get_string(file, "parent.child.string");
+    json_create("tests/data/create.json", file);
 
     for (int i = 0; array[i] != NULL; ++i)
-        printf("array[%d]: %p" "\n", i, array[i]);
+        printf("array[%d]: %s" "\n", i, json_object_get_string(array[i]));
     printf("double: %lf" "\n", dbl);
     printf("int: %d" "\n", itg);
     printf("string: %s" "\n", string);
