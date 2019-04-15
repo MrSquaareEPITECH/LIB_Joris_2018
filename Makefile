@@ -20,6 +20,10 @@ PROJ_SRC		=		my_jsonc.c					\
 						getters/get_int.c			\
 						getters/get_object.c		\
 						getters/get_string.c		\
+						setters/set_array.c			\
+						setters/set_double.c		\
+						setters/set_int.c			\
+						setters/set_string.c		\
 						lib/str_count.c				\
 						lib/str_cpy.c				\
 						lib/str_free.c				\
