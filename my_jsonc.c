@@ -14,7 +14,7 @@
 int my_jsonc(void)
 {
     json_object *file = json_load("tests/data/data.json");
-    json_set_int(file, "parent.child", "damage", 23);
+    json_set_int(file, "parent.child", "int", 23);
     json_set_double(file, "parent.child", "life", 49.5);
     json_set_string(file, "parent.child", "name", "Roger");
     json_create("tests/data/create.json", file);
