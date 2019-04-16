@@ -7,7 +7,6 @@ notifications:
   email:
     recipients:
       - $REPOSITORY_OWNER
-      - matteo.fauchon@epitech.eu
     on_success: always
     on_failure: always
 
@@ -33,11 +32,6 @@ jobs:
         - docker pull $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
       script:
         - docker run -v $PWD:/app $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG bash -c "cd app && make tests_run"
-    - name: "Functional tests"
-      install:
-        - docker pull $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
-      script:
-        - docker run -v $PWD:/app $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG bash -c "cd app && make tests_sh"
 
     - stage: deploy
       name: "Deploy"

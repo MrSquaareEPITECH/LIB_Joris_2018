@@ -3,3 +3,5 @@
 lib/json-c
 compile_commands.json
 a.out
+libjoris.a
+unit_tests
