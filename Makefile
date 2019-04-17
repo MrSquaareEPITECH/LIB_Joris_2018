@@ -26,6 +26,7 @@ PROJ_SRC		=		joris.c							\
 						getters/object_get_string.c		\
 						lib/str_count.c					\
 						lib/str_cpy.c					\
+						lib/my_atoi.c					\
 						lib/str_free.c					\
 						lib/str_len.c					\
 						lib/str_split.c					\
@@ -34,6 +35,9 @@ PROJ_SRC		=		joris.c							\
 						setters/object_set_int.c		\
 						setters/object_set_object.c		\
 						setters/object_set_string.c		\
+						setters/set_array_values/set_array_double.c	\
+						setters/set_array_values/set_array_int.c	\
+						setters/set_array_values/set_array_string.c	\
 
 TEST_SRC		=		tests/test_getters.c			\
 						tests/test_setters.c			\
