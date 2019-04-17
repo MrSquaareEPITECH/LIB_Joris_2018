@@ -28,5 +28,6 @@ void joris_object_set_int(json_object *file, char *target, int value)
             json_object_object_add(parent, key, child);
         }
         items[len - 1] = key;
+        str_free_list(items);
     }
 }

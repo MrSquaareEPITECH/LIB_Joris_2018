@@ -21,9 +21,13 @@ int joris(void)
     joris_object_set_string(create, "window.title", "Window Title");
     joris_object_set_int(create, "window.isFullscreen", 1);
     joris_object_set_double(create, "window.width", 1920.0);
-    joris_object_set_double(create, "window.height", 1080.0);
+    joris_object_set_array(create, "window.stats", "int", "19,53,28,12");
+    joris_object_set_double(create, "window.damage", 51.4);
     joris_file_set("tests/file/create.json", create);
     printf("window: %s", json_object_to_json_string_ext(window,
             JSON_C_TO_STRING_PRETTY));
+    str_free_list(array);
+    json_object_put(create);
+    json_object_put(data);
     return (0);
 }

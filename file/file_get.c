@@ -31,5 +31,6 @@ json_object *joris_file_get(char *path)
         }
         close(fd);
     }
+    free(buffer);
     return (json);
 }

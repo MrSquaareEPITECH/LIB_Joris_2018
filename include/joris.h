@@ -23,10 +23,14 @@ json_object *joris_object_get_object(json_object *json, char **items);
 char *joris_object_get_string(json_object *file, char *target);
 
 // Setters
-void joris_object_set_array(json_object *file, char *target);
+void joris_object_set_array(json_object *file, char *target, char *type, char
+*value);
 void joris_object_set_double(json_object *file, char *target, double value);
 void joris_object_set_int(json_object *file, char *target, int value);
 void joris_object_set_object(json_object *file, char *target);
 void joris_object_set_string(json_object *file, char *target, char *value);
+void set_array_double(char *value, json_object *child);
+void set_array_int(char *value, json_object *child);
+void set_array_string(char *value, json_object *child);
 
 #endif // LIB_JORIS_2018_JORIS_H
