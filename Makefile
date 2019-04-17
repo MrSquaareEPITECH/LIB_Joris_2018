@@ -35,7 +35,8 @@ PROJ_SRC		=		joris.c							\
 						setters/object_set_object.c		\
 						setters/object_set_string.c		\
 
-TEST_SRC		=		tests/test_src.c		\
+TEST_SRC		=		tests/test_getters.c			\
+						tests/test_setters.c			\
 
 MAIN_OBJ		=		$(MAIN_SRC:.c=.o)
 
@@ -52,7 +53,7 @@ INCLUDE_DIR		=		"include/"
 JSON_C_DIR		=		"lib/json-c/"
 
 CFLAGS			+=		-I $(INCLUDE_DIR)
-CFLAGS			+=		-W -Wall -Wextra
+CFLAGS			+=		-W -Wall -Wextra -g3
 CFLAGS			+=		-I $(JSON_C_DIR)
 
 LDFLAGS			+=		-L $(JSON_C_DIR) -ljson-c

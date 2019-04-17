@@ -8,6 +8,8 @@
 #ifndef LIB_JORIS_2018_JORIS_H
 #define LIB_JORIS_2018_JORIS_H
 
+#include <json.h>
+
 // File
 json_object *joris_file_create(char *path);
 json_object *joris_file_get(char *path);
