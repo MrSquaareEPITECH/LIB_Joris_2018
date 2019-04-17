@@ -6,17 +6,10 @@
 */
 
 #include <json.h>
+#include <string.h>
 #include "lib.h"
 #include "joris.h"
 #include "set_array.h"
-#include <string.h>
-
-array_type_t array_type[] = {
-        {"double", &set_array_double},
-        {"int", &set_array_int},
-        {"string", &set_array_string},
-        {NULL, NULL}
-};
 
 void add_values(char *type, char *value, json_object *child)
 {

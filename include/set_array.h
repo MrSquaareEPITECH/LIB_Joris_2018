@@ -15,6 +15,4 @@ typedef struct array_type_s {
     void (*function)(char *value, json_object *child);
 } array_type_t;
 
-extern array_type_t array_type[];
-
 #endif //LIB_JORIS_2018_SET_ARRAY_H

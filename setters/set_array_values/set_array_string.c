@@ -9,7 +9,7 @@
 #include <joris.h>
 #include <lib.h>
 
-void set_array_string(char *value, json_object *child)
+void joris_object_set_array_string(char *value, json_object *child)
 {
     json_object *json_value = NULL;
     char **items = NULL;
