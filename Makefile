@@ -2,42 +2,34 @@
 ## EPITECH PROJECT, 2019
 ## Makefile
 ## File description:
-## Makefile for LIB_Joris_2018
+## Makefile for LIB_MyLIB_2018
 ##
 
 NAME			=		a.out
-LIB_NAME		=		libjoris.a
+LIB_NAME		=		libjoris.so
 TEST_NAME		=		tests/unit_tests
 
 CC				=		gcc
-AR				=		ar rcs
 RM				=		rm -rf
 
 MAIN_SRC		=		main.c
 
-PROJ_SRC		=		joris.c							\
-						file/file_create.c				\
-						file/file_get.c					\
-						file/file_set.c					\
-						getters/object_get_array.c		\
-						getters/object_get_double.c		\
-						getters/object_get_int.c		\
-						getters/object_get_object.c		\
-						getters/object_get_string.c		\
-						lib/str_count.c					\
-						lib/str_cpy.c					\
-						lib/my_atoi.c					\
-						lib/str_free.c					\
-						lib/str_len.c					\
-						lib/str_split.c					\
-						setters/object_set_array.c		\
-						setters/object_set_double.c		\
-						setters/object_set_int.c		\
-						setters/object_set_object.c		\
-						setters/object_set_string.c		\
-						setters/set_array_values/set_array_double.c	\
-						setters/set_array_values/set_array_int.c	\
-						setters/set_array_values/set_array_string.c	\
+PROJ_SRC		=		file/file_create.c							\
+						file/file_get.c								\
+						file/file_set.c								\
+						getters/object_get_array.c					\
+						getters/object_get_double.c					\
+						getters/object_get_int.c					\
+						getters/object_get_object.c					\
+						getters/object_get_string.c					\
+						setters/object_set_array.c					\
+						setters/object_set_double.c					\
+						setters/object_set_int.c					\
+						setters/object_set_object.c					\
+						setters/object_set_string.c					\
+						setters/array/object_set_array_double.c		\
+						setters/array/object_set_array_int.c		\
+						setters/array/object_set_array_string.c		\
 
 TEST_SRC		=		tests/test_getters.c			\
 						tests/test_setters.c			\
@@ -54,22 +46,32 @@ TEST_COV		=		$(PROJ_SRC:.c=.gcda)	\
 						$(TEST_SRC:.c=.gcno)	\
 
 INCLUDE_DIR		=		"include/"
-JSON_C_DIR		=		"lib/json-c/"
+LIBMY_DIR		=		"lib/my/"
+LIBJSONC_DIR	=		"lib/jsonc/"
 
 CFLAGS			+=		-I $(INCLUDE_DIR)
-CFLAGS			+=		-W -Wall -Wextra -g3
-CFLAGS			+=		-I $(JSON_C_DIR)
+CFLAGS			+=		-W -Wall -Wextra
+CFLAGS			+=		-I $(LIBMY_DIR)/include -I $(LIBJSONC_DIR)
 
-LDFLAGS			+=		-L $(JSON_C_DIR) -ljson-c
+LDFLAGS			+=		-L $(LIBMY_DIR) -lmy -L $(LIBJSONC_DIR) -ljson-c
 
-all:			build_json_c $(NAME)
+all:			lib_my lib_jsonc $(NAME)
 
-build_json_c:
-				bash "scripts/build_json_c.sh"
+lib_jsonc:
+				bash "scripts/build_jsonc.sh"
 
-all_clean:		clean tests_clean
+lib_my:
+				$(MAKE) -C $(LIBMY_DIR) lib_re
 
-all_fclean:		fclean tests_fclean
+lib_my_clean:
+				$(MAKE) -C $(LIBMY_DIR) lib_clean
+
+lib_my_fclean:
+				$(MAKE) -C $(LIBMY_DIR) lib_fclean
+
+all_clean:		clean lib_clean lib_my_clean tests_clean
+
+all_fclean:		fclean lib_fclean lib_my_fclean tests_fclean
 
 $(NAME):		$(MAIN_OBJ) $(PROJ_OBJ)
 				$(CC) $(MAIN_OBJ) $(PROJ_OBJ) -o $(NAME) $(LDFLAGS) $(LDLIBS)
@@ -83,6 +85,20 @@ fclean:			clean
 re:				fclean all
 
 sweet:			all clean
+
+lib:			CC += -shared -fPIC
+lib:			build_my build_json_c $(PROJ_OBJ)
+				$(CC) $(PROJ_OBJ) -o $(LIB_NAME) $(LDFLAGS) $(LDLIBS)
+
+lib_clean:
+				$(RM) $(PROJ_OBJ)
+
+lib_fclean:		lib_clean
+				$(RM) $(LIB_NAME)
+
+lib_re:			lib_fclean lib
+
+lib_sweet:		lib lib_clean
 
 tests_run:		CFLAGS += -fprofile-arcs -ftest-coverage
 tests_run:		$(PROJ_OBJ) $(TEST_OBJ)
@@ -102,4 +118,4 @@ tests_sweet:	tests_run tests_clean
 
 tests_sh:       sweet
 
-.PHONY:         all all_clean all_fclean clean fclean re sweet tests_run tests_clean tests_fclean tests_re tests_sweet tests_sh
+.PHONY:         all all_clean all_fclean clean fclean re sweet lib lib_clean lib_fclean lib_re lib_sweet tests_run tests_clean tests_fclean tests_re tests_sweet tests_sh

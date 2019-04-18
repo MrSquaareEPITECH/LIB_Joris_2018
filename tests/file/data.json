@@ -1,9 +1,8 @@
 {
   "window": {
     "title": "RobertoPG",
-    "array": [18, 13],
-    "mainScene": 12,
-    "width": 1080.0,
-    "height": 720.0
+    "size": [1920.0, 1080.0],
+    "ratio": 1.5,
+    "mainScene": 1
   }
 }

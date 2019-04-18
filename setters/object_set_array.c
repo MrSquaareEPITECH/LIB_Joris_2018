@@ -7,9 +7,9 @@
 
 #include <json.h>
 #include <string.h>
-#include "lib.h"
 #include "joris.h"
 #include "set_array.h"
+#include "my.h"
 
 void add_values(char *type, char *value, json_object *child)
 {
@@ -28,8 +28,8 @@ void joris_object_set_array(json_object *file, char *target, char *type, char
     json_object *child = NULL;
 
     if (target) {
-        items = str_split(target, ".");
-        len = str_len_list(items);
+        items = my_strsplit(target, ".");
+        len = my_arrlen((void **) items);
         key = items[len - 1];
         items[len - 1] = NULL;
         parent = joris_object_get_object(file, items);
@@ -39,6 +39,6 @@ void joris_object_set_array(json_object *file, char *target, char *type, char
             add_values(type, value, child);
         }
         items[len - 1] = key;
-        str_free_list(items);
+        my_arrfree((void **) items);
     }
 }

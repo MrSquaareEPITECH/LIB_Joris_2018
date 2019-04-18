@@ -6,8 +6,8 @@
 */
 
 #include <json.h>
-#include "lib.h"
 #include "joris.h"
+#include "my.h"
 
 char *joris_object_get_string(json_object *file, char *target)
 {
@@ -16,7 +16,7 @@ char *joris_object_get_string(json_object *file, char *target)
     json_object *json = NULL;
 
     if (target) {
-        items = str_split(target, ".");
+        items = my_strsplit(target, ".");
         json = joris_object_get_object(file, items);
         string = (char *) json_object_get_string(json);
     }

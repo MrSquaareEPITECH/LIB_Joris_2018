@@ -6,7 +6,6 @@
 */
 
 #include <json.h>
-#include "lib.h"
 #include "joris.h"
 
 json_object *joris_object_get_object(json_object *json, char **items)
