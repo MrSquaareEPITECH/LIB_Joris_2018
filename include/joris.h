@@ -34,7 +34,7 @@ void joris_object_set_array_double(char *value, json_object *child);
 void joris_object_set_array_int(char *value, json_object *child);
 void joris_object_set_array_string(char *value, json_object *child);
 
-static const array_type_t array_type[] = {
+static const array_type_t ARRAY_TYPE[] = {
         {"double", &joris_object_set_array_double},
         {"int", &joris_object_set_array_int},
         {"string", &joris_object_set_array_string},

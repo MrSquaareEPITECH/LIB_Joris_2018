@@ -11,15 +11,15 @@
 #include "set_array.h"
 #include "my.h"
 
-void add_values(char *type, char *value, json_object *child)
+static void array_add_values(json_object *child, char *value, char *type)
 {
-    for (int i = 0; array_type[i].type; i++)
-        if (strcmp(type, array_type[i].type) == 0)
-            array_type[i].function(value, child);
+    for (int i = 0; ARRAY_TYPE[i].type; i++)
+        if (my_strcmp(type, ARRAY_TYPE[i].type) == 0)
+            ARRAY_TYPE[i].function(value, child);
 }
 
-void joris_object_set_array(json_object *file, char *target, char *type, char
-*value)
+void joris_object_set_array(json_object *file, char *target,
+        char *value, char *type)
 {
     char **items = NULL;
     int len = 0;
@@ -36,7 +36,7 @@ void joris_object_set_array(json_object *file, char *target, char *type, char
         if (parent) {
             child = json_object_new_array();
             json_object_object_add(parent, key, child);
-            add_values(type, value, child);
+            array_add_values(child, value, type);
         }
         items[len - 1] = key;
         my_arrfree((void **) items);

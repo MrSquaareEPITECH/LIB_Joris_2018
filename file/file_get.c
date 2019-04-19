@@ -5,7 +5,6 @@
 ** LIB_Joris_2018
 */
 
-#include <stdio.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <json.h>

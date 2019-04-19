@@ -53,7 +53,8 @@ CFLAGS			+=		-I $(INCLUDE_DIR)
 CFLAGS			+=		-W -Wall -Wextra
 CFLAGS			+=		-I $(LIB_MY_DIR)/include -I $(LIB_JSONC_DIR)
 
-LDFLAGS			+=		-L $(LIB_MY_DIR) -lmy -L $(LIB_JSONC_DIR) -ljson-c
+LDFLAGS			+=		-L $(LIB_MY_DIR) -Wl,-R $(LIB_MY_DIR) -lmy
+LDFLAGS			+=		-L $(LIB_JSONC_DIR) -Wl,-R $(LIB_JSONC_DIR) -ljson-c
 
 all:			lib_my lib_jsonc $(NAME)
 
