@@ -18,5 +18,12 @@ int main(void)
 
     (void) window;
     joris_object_set_object(create, "window");
+    joris_object_set_string(create, "window.title", "Window Title");
+    joris_object_set_array(create, "window.size", "1920.0,1080.0", "double");
+    joris_object_set_double(create, "window.ratio", 1.5);
+    joris_object_set_int(create, "window.mainScene", 1);
+    joris_file_set("tests/file/create.json", create);
+    printf("window: %s", json_object_to_json_string_ext(window,
+            JSON_C_TO_STRING_PRETTY));
     return (0);
 }

@@ -46,14 +46,14 @@ TEST_COV		=		$(PROJ_SRC:.c=.gcda)	\
 						$(TEST_SRC:.c=.gcno)	\
 
 INCLUDE_DIR		=		"include/"
-LIBMY_DIR		=		"lib/my/"
-LIBJSONC_DIR	=		"lib/jsonc/"
+LIB_MY_DIR		=		"lib/my/"
+LIB_JSONC_DIR	=		"lib/jsonc/"
 
 CFLAGS			+=		-I $(INCLUDE_DIR)
 CFLAGS			+=		-W -Wall -Wextra
-CFLAGS			+=		-I $(LIBMY_DIR)/include -I $(LIBJSONC_DIR)
+CFLAGS			+=		-I $(LIB_MY_DIR)/include -I $(LIB_JSONC_DIR)
 
-LDFLAGS			+=		-L $(LIBMY_DIR) -lmy -L $(LIBJSONC_DIR) -ljson-c
+LDFLAGS			+=		-L $(LIB_MY_DIR) -lmy -L $(LIB_JSONC_DIR) -ljson-c
 
 all:			lib_my lib_jsonc $(NAME)
 
@@ -61,13 +61,13 @@ lib_jsonc:
 				bash "scripts/build_jsonc.sh"
 
 lib_my:
-				$(MAKE) -C $(LIBMY_DIR) lib_re
+				$(MAKE) -C $(LIB_MY_DIR) lib_re
 
 lib_my_clean:
-				$(MAKE) -C $(LIBMY_DIR) lib_clean
+				$(MAKE) -C $(LIB_MY_DIR) lib_clean
 
 lib_my_fclean:
-				$(MAKE) -C $(LIBMY_DIR) lib_fclean
+				$(MAKE) -C $(LIB_MY_DIR) lib_fclean
 
 all_clean:		clean lib_clean lib_my_clean tests_clean
 
@@ -87,7 +87,7 @@ re:				fclean all
 sweet:			all clean
 
 lib:			CC += -shared -fPIC
-lib:			build_my build_json_c $(PROJ_OBJ)
+lib:			lib_my lib_jsonc $(PROJ_OBJ)
 				$(CC) $(PROJ_OBJ) -o $(LIB_NAME) $(LDFLAGS) $(LDLIBS)
 
 lib_clean:

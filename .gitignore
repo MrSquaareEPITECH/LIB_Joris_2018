@@ -1,7 +1,6 @@
 .idea
 .vscode
 lib/jsonc
-lib/my
 compile_commands.json
 a.out
 libjoris.so
