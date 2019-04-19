@@ -5,7 +5,6 @@
 ** LIB_Joris_2018
 */
 
-#include <stdio.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <json.h>
@@ -31,5 +30,6 @@ json_object *joris_file_get(char *path)
         }
         close(fd);
     }
+    free(buffer);
     return (json);
 }

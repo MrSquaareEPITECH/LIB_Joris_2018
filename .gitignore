@@ -1,7 +1,6 @@
 .idea
 .vscode
-lib/json-c
 compile_commands.json
 a.out
-libjoris.a
+libjoris.so
 unit_tests
