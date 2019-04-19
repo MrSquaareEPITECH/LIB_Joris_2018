@@ -2,7 +2,7 @@
 ## EPITECH PROJECT, 2019
 ## Makefile
 ## File description:
-## Makefile for LIB_MyLIB_2018
+## Makefile for LIB_Joris_2018
 ##
 
 NAME			=		a.out
