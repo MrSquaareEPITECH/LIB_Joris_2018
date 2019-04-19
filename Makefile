@@ -57,6 +57,10 @@ LDFLAGS			+=		-L $(LIB_MY_DIR) -lmy -L $(LIB_JSONC_DIR) -ljson-c
 
 all:			lib_my lib_jsonc $(NAME)
 
+all_clean:		lib_my_clean clean lib_clean tests_clean
+
+all_fclean:		lib_my_fclean fclean lib_fclean tests_fclean
+
 lib_jsonc:
 				bash "scripts/build_jsonc.sh"
 
@@ -68,10 +72,6 @@ lib_my_clean:
 
 lib_my_fclean:
 				$(MAKE) -C $(LIB_MY_DIR) lib_fclean
-
-all_clean:		clean lib_clean lib_my_clean tests_clean
-
-all_fclean:		fclean lib_fclean lib_my_fclean tests_fclean
 
 $(NAME):		$(MAIN_OBJ) $(PROJ_OBJ)
 				$(CC) $(MAIN_OBJ) $(PROJ_OBJ) -o $(NAME) $(LDFLAGS) $(LDLIBS)
