@@ -63,7 +63,7 @@ all_clean:		clean lib_clean tests_clean
 all_fclean:		submod_clean fclean lib_fclean tests_fclean
 
 submod_clean:
-				git submodule foreach "git clean -fdx"
+				git submodule foreach --recursive "git clean -fdx"
 
 submod_update:
 				git submodule sync --recursive
