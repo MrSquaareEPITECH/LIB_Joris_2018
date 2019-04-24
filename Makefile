@@ -87,7 +87,8 @@ re:				fclean all
 
 sweet:			all clean
 
-lib:			CC += -shared -fPIC
+lib:			CFLAGS += -fPIC
+lib:			LDFLAGS += -shared
 lib:			lib_my lib_jsonc $(PROJ_OBJ)
 				$(CC) $(PROJ_OBJ) -o $(LIB_NAME) $(LDFLAGS) $(LDLIBS)
 
