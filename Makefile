@@ -53,16 +53,20 @@ CFLAGS			+=		-I $(INCLUDE_DIR)
 CFLAGS			+=		-W -Wall -Wextra
 CFLAGS			+=		-I $(LIB_MY_DIR)/include -I $(LIB_JSONC_DIR)
 
-LDFLAGS			+=		-L $(LIB_MY_DIR) -Wl,-R $(LIB_MY_DIR) -lmy
-LDFLAGS			+=		-L $(LIB_JSONC_DIR) -Wl,-R $(LIB_JSONC_DIR) -ljson-c
+LDFLAGS			+=		-L $(LIB_MY_DIR) -Wl,-R "$(PWD)/$(LIB_MY_DIR)" -lmy
+LDFLAGS			+=		-L $(LIB_JSONC_DIR) -Wl,-R "$(PWD)/$(LIB_JSONC_DIR)" -ljson-c
 
-all:			lib_my lib_jsonc $(NAME)
+all:			$(NAME)
 
-all_clean:		lib_my_clean clean lib_clean tests_clean
+all_clean:		clean lib_clean tests_clean
 
-all_fclean:		lib_my_fclean fclean lib_fclean tests_fclean
+all_fclean:		submod_clean fclean lib_fclean tests_fclean
 
-lib_update:
+submod_clean:
+				git submodule foreach --recursive "git clean -fdx"
+
+submod_update:
+				git submodule sync --recursive
 				git submodule update --init --recursive --remote
 
 .ONESHELL:
@@ -82,13 +86,7 @@ else
 				cd $(LIB_MY_DIR) && $(MAKE) lib_re
 endif
 
-lib_my_clean:
-				$(MAKE) -C $(LIB_MY_DIR) lib_clean
-
-lib_my_fclean:
-				$(MAKE) -C $(LIB_MY_DIR) lib_fclean
-
-$(NAME):		$(MAIN_OBJ) $(PROJ_OBJ)
+$(NAME):		lib_jsonc lib_my $(MAIN_OBJ) $(PROJ_OBJ)
 				$(CC) $(MAIN_OBJ) $(PROJ_OBJ) -o $(NAME) $(LDFLAGS) $(LDLIBS)
 
 clean:
@@ -103,7 +101,7 @@ sweet:			all clean
 
 lib:			CFLAGS += -fPIC
 lib:			LDFLAGS += -shared
-lib:			lib_my lib_jsonc $(PROJ_OBJ)
+lib:			lib_jsonc lib_my $(PROJ_OBJ)
 				$(CC) $(PROJ_OBJ) -o $(LIB_NAME) $(LDFLAGS) $(LDLIBS)
 
 lib_clean:
@@ -117,7 +115,7 @@ lib_re:			lib_fclean lib
 lib_sweet:		lib lib_clean
 
 tests_run:		CFLAGS += -fprofile-arcs -ftest-coverage
-tests_run:		lib_my lib_jsonc $(PROJ_OBJ) $(TEST_OBJ)
+tests_run:		lib_jsonc lib_my $(PROJ_OBJ) $(TEST_OBJ)
 				$(CC) $(PROJ_OBJ) $(TEST_OBJ) -o $(TEST_NAME) $(LDFLAGS) $(LDLIBS) -lgcov -lcriterion
 				$(TEST_NAME)
 
