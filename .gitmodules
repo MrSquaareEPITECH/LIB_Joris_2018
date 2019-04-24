@@ -1,6 +1,8 @@
-[submodule "lib/my"]
-	path = lib/my
-	url = git@github.com:MrSquaare/LIB_MyLIB_2018.git
 [submodule "lib/jsonc"]
 	path = lib/jsonc
 	url = https://github.com/json-c/json-c.git
+	branch = master
+[submodule "lib/my"]
+	path = lib/my
+	url = git@github.com:MrSquaare/LIB_MyLIB_2018.git
+	branch = master

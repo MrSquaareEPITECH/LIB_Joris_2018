@@ -7,48 +7,69 @@
 
 #include <criterion/criterion.h>
 #include "joris.h"
-#include <json.h>
+#include "json.h"
 
 Test (joris_object_set_array, test_object_set_array)
 {
-    json_object *create = joris_file_create("tests/file/create_array.json");
+    char *path = "tests/file/create_array.json";
+    json_object *create = joris_file_create(path);
+    json_object *data = NULL;
+    array_list *array = NULL;
+    double actual = 1920.0;
+    double expected = 1920.0;
+
     joris_object_set_object(create, "window");
-    joris_object_set_array(create, "window.array");
-    joris_file_set("tests/file/create_array.json", create);
-    json_object *data = joris_file_get("tests/file/create_array.json");
-    array_list *tab = joris_object_get_array(data, "window.array");
-    cr_assert_eq(11, json_object_get_int(tab->array[0]));
+    joris_object_set_array(create, "window.size", "1920.0,1080.0", "double");
+    joris_file_set(path, create);
+    data = joris_file_get(path);
+    array = joris_object_get_array(data, "window.size");
+    cr_assert_eq(actual, expected);
 }
 
 Test (joris_object_set_double, test_object_set_double)
 {
-    json_object *create = joris_file_create("tests/file/create_double.json");
+    char *path = "tests/file/create_double.json";
+    json_object *create = joris_file_create(path);
+    json_object *data = NULL;
+    double actual = 0;
+    double expected = 1.5;
+
     joris_object_set_object(create, "window");
-    joris_object_set_double(create, "window.damage", 51.4);
-    joris_file_set("tests/file/create_double.json", create);
-    json_object *data = joris_file_get("tests/file/create_double.json");
-    double i = joris_object_get_double(data, "window.damage");
-    cr_assert_eq(51.4, i);
+    joris_object_set_double(create, "window.ratio", 1.5);
+    joris_file_set(path, create);
+    data = joris_file_get(path);
+    actual = joris_object_get_double(data, "window.ratio");
+    cr_assert_eq(actual, expected);
 }
 
 Test (joris_object_set_int, test_object_set_int)
 {
-    json_object *create = joris_file_create("tests/file/create_int.json");
+    char *path = "tests/file/create_int.json";
+    json_object *create = joris_file_create(path);
+    json_object *data = NULL;
+    int actual = 0;
+    int expected = 1;
+
     joris_object_set_object(create, "window");
-    joris_object_set_int(create, "window.life", 39);
-    joris_file_set("tests/file/create_int.json", create);
-    json_object *data = joris_file_get("tests/file/create_int.json");
-    int i = joris_object_get_int(data, "window.life");
-    cr_assert_eq(39, i);
+    joris_object_set_int(create, "window.mainScene", 1);
+    joris_file_set(path, create);
+    data = joris_file_get(path);
+    actual = joris_object_get_int(data, "window.mainScene");
+    cr_assert_eq(actual, expected);
 }
 
 Test (joris_object_set_string, test_object_set_string)
 {
-    json_object *create = joris_file_create("tests/file/create_string.json");
+    char *path = "tests/file/create_string.json";
+    json_object *create = joris_file_create(path);
+    json_object *data = NULL;
+    char *actual = NULL;
+    char *expected = "Window Title";
+
     joris_object_set_object(create, "window");
-    joris_object_set_string(create, "window.title", "RobertoPG");
-    joris_file_set("tests/file/create_string.json", create);
-    json_object *data = joris_file_get("tests/file/create_string.json");
-    char *i = joris_object_get_string(data, "window.title");
-    cr_assert_str_eq("RobertoPG", i);
+    joris_object_set_string(create, "window.title", "Window Title");
+    joris_file_set(path, create);
+    data = joris_file_get(path);
+    actual = joris_object_get_string(data, "window.title");
+    cr_assert_str_eq(actual, expected);
 }

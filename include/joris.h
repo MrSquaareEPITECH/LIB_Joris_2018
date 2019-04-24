@@ -24,8 +24,8 @@ json_object *joris_object_get_object(json_object *json, char **items);
 char *joris_object_get_string(json_object *file, char *target);
 
 // Setters
-void joris_object_set_array(json_object *file, char *target, char *type, char
-*value);
+void joris_object_set_array(json_object *file, char *target,
+        char *value, char *type);
 void joris_object_set_double(json_object *file, char *target, double value);
 void joris_object_set_int(json_object *file, char *target, int value);
 void joris_object_set_object(json_object *file, char *target);
