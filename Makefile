@@ -62,6 +62,9 @@ all_clean:		lib_my_clean clean lib_clean tests_clean
 
 all_fclean:		lib_my_fclean fclean lib_fclean tests_fclean
 
+lib_update:
+				git submodule update --init --recursive --remote
+
 lib_jsonc:
 				bash "scripts/build_jsonc.sh"
 
