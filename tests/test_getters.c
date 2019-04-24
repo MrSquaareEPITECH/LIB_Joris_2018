@@ -7,36 +7,45 @@
 
 #include <criterion/criterion.h>
 #include "joris.h"
-#include <json.h>
+#include "json.h"
 
 Test (joris_object_get_array, test_object_get_array)
 {
-    json_object *data = joris_file_get("tests/file/data.json");
+    char *path = "tests/file/data.json";
+    json_object *data = joris_file_get(path);
+    array_list *array = joris_object_get_array(data, "window.size");
+    double actual = 1920.0;
+    double expected = 1920.0;
 
-    array_list *tab = joris_object_get_array(data, "window.array");
-    cr_assert_eq(18, json_object_get_int(tab->array[0]));
+    cr_assert_eq(actual, expected);
 }
 
 Test (joris_object_get_double, test_object_get_double)
 {
-    json_object *data = joris_file_get("tests/file/data.json");
+    char *path = "tests/file/data.json";
+    json_object *data = joris_file_get(path);
+    double actual = joris_object_get_double(data, "window.ratio");
+    double expected = 1.5;
 
-    double i = joris_object_get_double(data, "window.width");
-    cr_assert_eq(1080.0, i);
+    cr_assert_eq(actual, expected);
 }
 
 Test (joris_object_get_int, test_object_get_int)
 {
-    json_object *data = joris_file_get("tests/file/data.json");
+    char *path = "tests/file/data.json";
+    json_object *data = joris_file_get(path);
+    int actual = joris_object_get_int(data, "window.mainScene");
+    int expected = 1;
 
-    int i = joris_object_get_int(data, "window.mainScene");
-    cr_assert_eq(12, i);
+    cr_assert_eq(actual, expected);
 }
 
 Test (joris_object_get_string, test_object_get_string)
 {
-    json_object *data = joris_file_get("tests/file/data.json");
+    char *path = "tests/file/data.json";
+    json_object *data = joris_file_get(path);
+    char *actual = joris_object_get_string(data, "window.title");
+    char *expected = "Window Title";
 
-    char *string = joris_object_get_string(data, "window.title");
-    cr_assert_str_eq("RobertoPG", string);
+    cr_assert_str_eq(actual, expected);
 }

@@ -65,11 +65,22 @@ all_fclean:		lib_my_fclean fclean lib_fclean tests_fclean
 lib_update:
 				git submodule update --init --recursive --remote
 
+.ONESHELL:
 lib_jsonc:
-				bash "scripts/build_jsonc.sh"
+ifneq ("$(wildcard ./lib/jsonc/libjson-c.so)","")
+else
+				cd lib/jsonc
+				sh autogen.sh
+				./configure
+				cmake .
+				make
+endif
 
 lib_my:
-				$(MAKE) -C $(LIB_MY_DIR) lib_re
+ifneq ("$(wildcard ./lib/my/libmy.so)","")
+else
+				cd $(LIB_MY_DIR) && $(MAKE) lib_re
+endif
 
 lib_my_clean:
 				$(MAKE) -C $(LIB_MY_DIR) lib_clean
@@ -106,7 +117,7 @@ lib_re:			lib_fclean lib
 lib_sweet:		lib lib_clean
 
 tests_run:		CFLAGS += -fprofile-arcs -ftest-coverage
-tests_run:		$(PROJ_OBJ) $(TEST_OBJ)
+tests_run:		lib_my lib_jsonc $(PROJ_OBJ) $(TEST_OBJ)
 				$(CC) $(PROJ_OBJ) $(TEST_OBJ) -o $(TEST_NAME) $(LDFLAGS) $(LDLIBS) -lgcov -lcriterion
 				$(TEST_NAME)
 
