@@ -4,3 +4,4 @@ compile_commands.json
 a.out
 libjoris.so
 unit_tests
+*.o

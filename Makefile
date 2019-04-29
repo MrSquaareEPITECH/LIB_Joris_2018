@@ -1,5 +1,6 @@
 
 NAME			=		a.out
+LIB_NAME		=		libjoris.so
 TEST_NAME		=		tests/unit_tests
 
 NO_COLOR		=		\e[0;0m
@@ -63,9 +64,9 @@ MAKEFLAGS		+=		--silent
 
 all:			$(NAME)
 
-all_clean:		clean tests_clean
+all_clean:		clean lib_clean tests_clean
 
-all_fclean:		lib_all_fclean fclean tests_fclean
+all_fclean:		lib_all_fclean fclean lib_fclean tests_fclean
 
 lib_all:		lib_my lib_jsonc
 
