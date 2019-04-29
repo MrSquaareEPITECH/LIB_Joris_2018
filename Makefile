@@ -1,13 +1,10 @@
-##
-## EPITECH PROJECT, 2019
-## Makefile
-## File description:
-## Makefile for LIB_Joris_2018
-##
 
 NAME			=		a.out
-LIB_NAME		=		libjoris.so
 TEST_NAME		=		tests/unit_tests
+
+NO_COLOR		=		\e[0;0m
+GREEN_COLOR		=		\e[0;32m
+RED_COLOR		=		\e[0;31m
 
 CC				=		gcc
 RM				=		rm -rf
@@ -51,42 +48,66 @@ LIB_JSONC_DIR	=		"lib/jsonc/"
 
 CFLAGS			+=		-I $(INCLUDE_DIR)
 CFLAGS			+=		-W -Wall -Wextra
-CFLAGS			+=		-I $(LIB_MY_DIR)/include -I $(LIB_JSONC_DIR)
+CFLAGS			+=		-I $(LIB_MY_DIR)/include
+CFLAGS			+=		-I $(LIB_JSONC_DIR)
 
 LDFLAGS			+=		-L $(LIB_MY_DIR) -Wl,-R "$(PWD)/$(LIB_MY_DIR)" -lmy
 LDFLAGS			+=		-L $(LIB_JSONC_DIR) -Wl,-R "$(PWD)/$(LIB_JSONC_DIR)" -ljson-c
 
+MAKEFLAGS		+=		--silent
+
+%.o:			%.c
+				$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $< \
+				&& echo "$< $(GREEN_COLOR)successfully compiled$(NO_COLOR)" \
+				|| echo "$< $(RED_COLOR)couldn't be compiled$(NO_COLOR)"
+
 all:			$(NAME)
 
-all_clean:		clean lib_clean tests_clean
+all_clean:		clean tests_clean
 
-all_fclean:		submod_clean fclean lib_fclean tests_fclean
+all_fclean:		lib_all_fclean fclean tests_fclean
 
-submod_clean:
-				git submodule foreach --recursive "git clean -fdx"
+lib_all:		lib_my lib_jsonc
 
-submod_update:
-				git submodule sync --recursive
-				git submodule update --init --recursive --remote
+lib_all_fclean:	lib_my_fclean lib_jsonc_fclean
+
+lib_all_re:		lib_all_fclean lib_all
+
+lib_my:
+ifneq ("$(wildcard ./lib/my)","")
+else
+				git clone git@git.epitech.eu:/guillaume.bonnet@epitech.eu/LIB_MyLIB_2018 $(LIB_MY_DIR)
+				rm -rf $(LIB_MY_DIR)/.git
+endif
+ifneq ("$(wildcard ./lib/my/libmy.so)","")
+else
+				cd $(LIB_MY_DIR) && $(MAKE) lib_re
+endif
+
+lib_my_fclean:
+				$(RM) $(LIB_MY_DIR)
 
 .ONESHELL:
 lib_jsonc:
+ifneq ("$(wildcard ./lib/jsonc)","")
+else
+				git clone https://github.com/json-c/json-c.git $(LIB_JSONC_DIR)
+				rm -rf $(LIB_JSONC_DIR)/.git
+endif
 ifneq ("$(wildcard ./lib/jsonc/libjson-c.so)","")
 else
-				cd lib/jsonc
+				cd $(LIB_JSONC_DIR)
+				echo $(PWD)
 				sh autogen.sh
 				./configure
 				cmake .
 				make
 endif
 
-lib_my:
-ifneq ("$(wildcard ./lib/my/libmy.so)","")
-else
-				cd $(LIB_MY_DIR) && $(MAKE) lib_re
-endif
+lib_jsonc_fclean:
+				$(RM) $(LIB_JSONC_DIR)
 
-$(NAME):		lib_jsonc lib_my $(MAIN_OBJ) $(PROJ_OBJ)
+$(NAME):		lib_all $(MAIN_OBJ) $(PROJ_OBJ)
 				$(CC) $(MAIN_OBJ) $(PROJ_OBJ) -o $(NAME) $(LDFLAGS) $(LDLIBS)
 
 clean:
@@ -98,6 +119,9 @@ fclean:			clean
 re:				fclean all
 
 sweet:			all clean
+
+debug:			CFLAGS += -g3
+debug:			sweet
 
 lib:			CFLAGS += -fPIC
 lib:			LDFLAGS += -shared
@@ -115,8 +139,9 @@ lib_re:			lib_fclean lib
 lib_sweet:		lib lib_clean
 
 tests_run:		CFLAGS += -fprofile-arcs -ftest-coverage
-tests_run:		lib_jsonc lib_my $(PROJ_OBJ) $(TEST_OBJ)
-				$(CC) $(PROJ_OBJ) $(TEST_OBJ) -o $(TEST_NAME) $(LDFLAGS) $(LDLIBS) -lgcov -lcriterion
+tests_run:		LDLIBS += -lgcov -lcriterion
+tests_run:		$(PROJ_OBJ) $(TEST_OBJ)
+				$(CC) $(PROJ_OBJ) $(TEST_OBJ) -o $(TEST_NAME) $(LDFLAGS) $(LDLIBS)
 				$(TEST_NAME)
 
 tests_clean:	clean
@@ -131,5 +156,6 @@ tests_re:		tests_fclean tests_run
 tests_sweet:	tests_run tests_clean
 
 tests_sh:       sweet
+				sh tests/tests.sh $(NAME)
 
-.PHONY:         all all_clean all_fclean clean fclean re sweet lib lib_clean lib_fclean lib_re lib_sweet tests_run tests_clean tests_fclean tests_re tests_sweet tests_sh
+.PHONY:         all all_clean all_fclean clean fclean re sweet debug lib lib_clean lib_fclean lib_re lib_sweet tests_run tests_clean tests_fclean tests_re tests_sweet tests_sh
