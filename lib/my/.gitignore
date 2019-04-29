@@ -1,0 +1,7 @@
+.idea
+.vscode
+compile_commands.json
+a.out
+libmy.so
+unit_tests
+*.o
