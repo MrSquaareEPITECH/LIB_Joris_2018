@@ -12,22 +12,22 @@ RM				=		rm -rf
 
 MAIN_SRC		=		main.c
 
-PROJ_SRC		=		file/file_create.c							\
-						file/file_get.c								\
-						file/file_set.c								\
-						getters/object_get_array.c					\
-						getters/object_get_double.c					\
-						getters/object_get_int.c					\
-						getters/object_get_object.c					\
-						getters/object_get_string.c					\
-						setters/object_set_array.c					\
-						setters/object_set_double.c					\
-						setters/object_set_int.c					\
-						setters/object_set_object.c					\
-						setters/object_set_string.c					\
-						setters/array/object_set_array_double.c		\
-						setters/array/object_set_array_int.c		\
-						setters/array/object_set_array_string.c		\
+PROJ_SRC		=		src/file/file_create.c							\
+						src/file/file_get.c								\
+						src/file/file_set.c								\
+						src/getters/object_get_array.c					\
+						src/getters/object_get_double.c					\
+						src/getters/object_get_int.c					\
+						src/getters/object_get_object.c					\
+						src/getters/object_get_string.c					\
+						src/setters/object_set_array.c					\
+						src/setters/object_set_double.c					\
+						src/setters/object_set_int.c					\
+						src/setters/object_set_object.c					\
+						src/setters/object_set_string.c					\
+						src/setters/array/object_set_array_double.c		\
+						src/setters/array/object_set_array_int.c		\
+						src/setters/array/object_set_array_string.c		\
 
 TEST_SRC		=		tests/test_getters.c			\
 						tests/test_setters.c			\

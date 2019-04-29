@@ -17,6 +17,7 @@ Test (joris_object_get_array, test_object_get_array)
     double actual = 1920.0;
     double expected = 1920.0;
 
+    (void) array;
     cr_assert_eq(actual, expected);
 }
 

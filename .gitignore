@@ -5,3 +5,5 @@ a.out
 libjoris.so
 unit_tests
 *.o
+*.gcda
+*.gcno
