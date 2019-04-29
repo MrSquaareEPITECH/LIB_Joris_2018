@@ -1,3 +1,9 @@
+##
+## EPITECH PROJECT, 2019
+## Makefile
+## File description:
+## Makefile for LIB_Joris_2018
+##
 
 NAME			=		a.out
 LIB_NAME		=		libjoris.so
