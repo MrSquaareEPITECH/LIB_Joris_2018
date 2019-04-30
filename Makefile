@@ -132,7 +132,7 @@ debug:			sweet
 
 lib:			CFLAGS += -fPIC
 lib:			LDFLAGS += -shared
-lib:			lib_jsonc lib_my $(PROJ_OBJ)
+lib:			lib_all $(PROJ_OBJ)
 				$(CC) $(PROJ_OBJ) -o $(LIB_NAME) $(LDFLAGS) $(LDLIBS)
 
 lib_clean:
@@ -147,7 +147,7 @@ lib_sweet:		lib lib_clean
 
 tests_run:		CFLAGS += -fprofile-arcs -ftest-coverage
 tests_run:		LDLIBS += -lgcov -lcriterion
-tests_run:		$(PROJ_OBJ) $(TEST_OBJ)
+tests_run:		lib_all $(PROJ_OBJ) $(TEST_OBJ)
 				$(CC) $(PROJ_OBJ) $(TEST_OBJ) -o $(TEST_NAME) $(LDFLAGS) $(LDLIBS)
 				$(TEST_NAME)
 
