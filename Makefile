@@ -106,7 +106,6 @@ endif
 ifneq ("$(wildcard ./lib/jsonc/libjson-c.so)","")
 else
 				cd $(LIB_JSONC_DIR)
-				echo $(PWD)
 				sh autogen.sh
 				./configure
 				cmake .
