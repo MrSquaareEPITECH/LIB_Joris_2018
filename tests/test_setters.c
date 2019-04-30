@@ -23,6 +23,7 @@ Test (joris_object_set_array, test_object_set_array)
     joris_file_set(path, create);
     data = joris_file_get(path);
     array = joris_object_get_array(data, "window.size");
+    (void) array;
     cr_assert_eq(actual, expected);
 }
 
