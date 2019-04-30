@@ -68,7 +68,7 @@ MAKEFLAGS		+=		--silent
 %.o:			%.c
 				$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $< \
 				&& echo "$< $(GREEN_COLOR)successfully compiled$(NO_COLOR)" \
-				|| echo "$< $(RED_COLOR)couldn't be compiled$(NO_COLOR)"
+				|| { echo "$< $(RED_COLOR)couldn't be compiled$(NO_COLOR)"; exit 1; }
 
 all:			$(NAME)
 
