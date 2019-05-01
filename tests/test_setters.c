@@ -19,7 +19,8 @@ Test (joris_object_set_array, test_object_set_array)
     double expected = 1920.0;
 
     joris_object_set_object(create, "window");
-    joris_object_set_array(create, "window.size", "1920.0,1080.0", "double");
+    joris_object_set_array(create, "window.size", "1920.0,1080.0",
+            JORIS_ARR_DOUBLE);
     joris_file_set(path, create);
     data = joris_file_get(path);
     array = joris_object_get_array(data, "window.size");

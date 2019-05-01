@@ -5,11 +5,12 @@
 ** LIB_Joris_2018
 */
 
-#include <json.h>
-#include "joris.h"
+#include "json.h"
+#include "joris_getters.h"
+#include "joris_setters.h"
 #include "my.h"
 
-void joris_object_set_string(json_object *file, char *target, char *value)
+void joris_object_set_string(json_object *object, char *target, char *value)
 {
     char **items = NULL;
     int len = 0;
@@ -22,7 +23,7 @@ void joris_object_set_string(json_object *file, char *target, char *value)
         len = my_arrlen((void **) items);
         key = items[len - 1];
         items[len - 1] = NULL;
-        parent = joris_object_get_object(file, items);
+        parent = joris_object_get_object(object, items);
         if (parent) {
             child = json_object_new_string(value);
             json_object_object_add(parent, key, child);

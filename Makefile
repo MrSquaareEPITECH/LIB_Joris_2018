@@ -100,7 +100,7 @@ lib_my_fclean:
 lib_jsonc:
 ifneq ("$(wildcard ./lib/jsonc)","")
 else
-				git clone https://github.com/json-c/json-c.git $(LIB_JSONC_DIR)
+				git clone --branch json-c-0.13 https://github.com/json-c/json-c.git $(LIB_JSONC_DIR)
 				rm -rf $(LIB_JSONC_DIR)/.git
 endif
 ifneq ("$(wildcard ./lib/jsonc/libjson-c.so)","")

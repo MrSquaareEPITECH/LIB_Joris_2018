@@ -5,21 +5,20 @@
 ** LIB_Joris_2018
 */
 
-#include <json.h>
 #include <string.h>
-#include "joris.h"
-#include "set_array.h"
+#include "joris_getters.h"
+#include "joris_setters.h"
 #include "my.h"
 
-static void array_add_values(json_object *child, char *value, char *type)
+static void array_add_values(json_object *object, char *value, int type)
 {
     for (int i = 0; ARRAY_TYPE[i].type; i++)
-        if (my_strcmp(type, ARRAY_TYPE[i].type) == 0)
-            ARRAY_TYPE[i].function(value, child);
+        if (type == ARRAY_TYPE[i].type)
+            ARRAY_TYPE[i].function(object, value);
 }
 
-void joris_object_set_array(json_object *file, char *target,
-        char *value, char *type)
+void joris_object_set_array(json_object *object, char *target,
+        char *value, int type)
 {
     char **items = NULL;
     int len = 0;
@@ -32,7 +31,7 @@ void joris_object_set_array(json_object *file, char *target,
         len = my_arrlen((void **) items);
         key = items[len - 1];
         items[len - 1] = NULL;
-        parent = joris_object_get_object(file, items);
+        parent = joris_object_get_object(object, items);
         if (parent) {
             child = json_object_new_array();
             json_object_object_add(parent, key, child);
