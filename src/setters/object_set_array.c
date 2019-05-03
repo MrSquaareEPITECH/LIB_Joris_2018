@@ -5,6 +5,7 @@
 ** LIB_Joris_2018
 */
 
+#include <stdlib.h>
 #include <string.h>
 #include "joris_getters.h"
 #include "joris_setters.h"
@@ -20,24 +21,22 @@ static void array_add_values(json_object *object, char *value, int type)
 void joris_object_set_array(json_object *object, char *target,
         char *value, int type)
 {
-    char **items = NULL;
-    int len = 0;
-    char *key = NULL;
-    json_object *parent = NULL;
+    char *key = target;
+    char *parent_target = my_strdup(target);
+    char *parent_end = NULL;
+    json_object *parent = object;
     json_object *child = NULL;
 
     if (target) {
-        items = my_strsplit(target, ".");
-        len = my_arrlen((void **) items);
-        key = items[len - 1];
-        items[len - 1] = NULL;
-        parent = joris_object_get_object(object, items);
-        if (parent) {
-            child = json_object_new_array();
-            json_object_object_add(parent, key, child);
-            array_add_values(child, value, type);
+        parent_end = my_strrchr(parent_target, '.');
+        if (parent_end) {
+            parent_end[0] = '\0';
+            key = parent_end + 1;
+            parent = joris_object_get_object(object, parent_target);
         }
-        items[len - 1] = key;
-        my_arrfree((void **) items);
+        child = json_object_new_array();
+        json_object_object_add(parent, key, child);
+        array_add_values(child, value, type);
+        free(parent_target);
     }
 }

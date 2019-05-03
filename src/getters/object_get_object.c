@@ -13,7 +13,7 @@ static json_object *joris_object_get_object_r(json_object *object, char **items)
 {
     if (*items) {
         json_object_object_get_ex(object, *items, &object);
-        object = joris_object_get_object(object, ++items);
+        object = joris_object_get_object_r(object, ++items);
     }
     return (object);
 }
@@ -26,4 +26,5 @@ json_object *joris_object_get_object(json_object *object, char *target)
     if (items)
         obj = joris_object_get_object_r(object, items);
     my_arrfree((void **) items);
+    return (obj);
 }
