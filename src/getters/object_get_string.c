@@ -5,19 +5,17 @@
 ** LIB_Joris_2018
 */
 
-#include <json.h>
-#include "joris.h"
+#include "json.h"
+#include "joris_getters.h"
 #include "my.h"
 
-char *joris_object_get_string(json_object *file, char *target)
+char *joris_object_get_string(json_object *object, char *target)
 {
     char *string = NULL;
-    char **items = NULL;
     json_object *json = NULL;
 
     if (target) {
-        items = my_strsplit(target, ".");
-        json = joris_object_get_object(file, items);
+        json = joris_object_get_object(object, target);
         string = (char *) json_object_get_string(json);
     }
     return (string);

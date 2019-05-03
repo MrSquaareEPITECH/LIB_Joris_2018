@@ -7,10 +7,10 @@
 
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <json.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "joris.h"
+#include "json.h"
+#include "joris_file.h"
 
 json_object *joris_file_get(char *path)
 {

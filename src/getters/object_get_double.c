@@ -5,19 +5,17 @@
 ** LIB_Joris_2018
 */
 
-#include <json.h>
-#include "joris.h"
+#include "json.h"
+#include "joris_getters.h"
 #include "my.h"
 
-double joris_object_get_double(json_object *file, char *target)
+double joris_object_get_double(json_object *object, char *target)
 {
     double number = 0;
-    char **items = NULL;
     json_object *json = NULL;
 
     if (target) {
-        items = my_strsplit(target, ".");
-        json = joris_object_get_object(file, items);
+        json = joris_object_get_object(object, target);
         number = json_object_get_double(json);
     }
     return (number);

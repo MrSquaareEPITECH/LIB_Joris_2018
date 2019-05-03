@@ -6,9 +6,9 @@
 */
 
 #include <fcntl.h>
-#include <json.h>
 #include <unistd.h>
-#include "joris.h"
+#include "json.h"
+#include "joris_file.h"
 
 void joris_file_set(char *path, json_object *json)
 {
