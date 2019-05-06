@@ -14,12 +14,12 @@ void joris_object_set_array_string(json_object *object, char *value)
     json_object *json_value = NULL;
     char **items = NULL;
 
-    items = my_strsplit(value, ",");
-    if (items) {
+    if (object && value) {
+        items = my_strsplit(value, ",");
         for (int i = 0; items[i]; i++) {
             json_value = json_object_new_string(items[i]);
             json_object_array_add(object, json_value);
         }
+        my_arrfree((void **) items);
     }
-    my_arrfree((void **) items);
 }

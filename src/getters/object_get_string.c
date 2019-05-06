@@ -14,7 +14,7 @@ char *joris_object_get_string(json_object *object, char *target)
     char *string = NULL;
     json_object *json = NULL;
 
-    if (target) {
+    if (object && target) {
         json = joris_object_get_object(object, target);
         string = (char *) json_object_get_string(json);
     }

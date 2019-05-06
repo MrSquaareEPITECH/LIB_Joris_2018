@@ -14,12 +14,13 @@
 void joris_object_set_object(json_object *object, char *target)
 {
     char *key = target;
-    char *parent_target = my_strdup(target);
+    char *parent_target = NULL;
     char *parent_end = NULL;
     json_object *parent = object;
     json_object *child = NULL;
 
-    if (target) {
+    if (object && target) {
+        parent_target = my_strdup(target);
         parent_end = my_strrchr(parent_target, '.');
         if (parent_end) {
             parent_end[0] = '\0';

@@ -14,7 +14,7 @@ double joris_object_get_double(json_object *object, char *target)
     double number = 0;
     json_object *json = NULL;
 
-    if (target) {
+    if (object && target) {
         json = joris_object_get_object(object, target);
         number = json_object_get_double(json);
     }
