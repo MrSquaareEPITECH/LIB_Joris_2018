@@ -10,19 +10,10 @@
 #include "json.h"
 #include "joris_file.h"
 
-void joris_file_set(char *path, json_object *json)
+int joris_file_set(const char *path, json_object *json)
 {
-    const char *json_string = NULL;
-    size_t len = 0;
-    int fd = 0;
+    int code = 0;
 
-    if (path) {
-        fd = open(path, O_WRONLY, 0755);
-        if (fd != -1) {
-            json_string = json_object_to_json_string_length(json,
-                    JSON_C_TO_STRING_PRETTY, &len);
-            write(fd, json_string, len);
-        }
-        close(fd);
-    }
+    code = json_object_to_file_ext(path, json, JSON_C_TO_STRING_PRETTY);
+    return (code);
 }
