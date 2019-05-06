@@ -14,7 +14,7 @@ array_list *joris_object_get_array(json_object *object, char *target)
     array_list *array = NULL;
     json_object *json = NULL;
 
-    if (target) {
+    if (object && target) {
         json = joris_object_get_object(object, target);
         array = json_object_get_array(json);
     }

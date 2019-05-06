@@ -10,22 +10,18 @@
 #include <unistd.h>
 #include "joris_file.h"
 
-json_object *joris_file_create(char *path)
+json_object *joris_file_create(const char *path)
 {
-    json_object *json = NULL;
-    const char *json_string = NULL;
-    size_t len = 0;
+    json_object *object = NULL;
     int fd = 0;
 
     if (path) {
-        json = json_object_new_object();
-        fd = open(path, O_CREAT | O_WRONLY, 0755);
+        fd = open(path, O_CREAT | O_WRONLY, 0644);
         if (fd != -1) {
-            json_string = json_object_to_json_string_length(json,
-                    JSON_C_TO_STRING_PRETTY, &len);
-            write(fd, json_string, len);
+            object = json_object_new_object();
+            json_object_to_fd(fd, object, JSON_C_TO_STRING_PRETTY);
         }
         close(fd);
     }
-    return (json);
+    return (object);
 }

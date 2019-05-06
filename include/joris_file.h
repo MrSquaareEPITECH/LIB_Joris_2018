@@ -10,8 +10,8 @@
 
 #include "json.h"
 
-json_object *joris_file_create(char *path);
-json_object *joris_file_get(char *path);
-void joris_file_set(char *path, json_object *json);
+json_object *joris_file_create(const char *path);
+json_object *joris_file_get(const char *path);
+int joris_file_set(const char *path, json_object *json);
 
 #endif // LIB_JORIS_2018_JORIS_FILE_H

@@ -21,10 +21,13 @@ static json_object *joris_object_get_object_r(json_object *object, char **items)
 json_object *joris_object_get_object(json_object *object, char *target)
 {
     json_object *obj = NULL;
-    char **items = my_strsplit(target, ".");
+    char **items = NULL;
 
-    if (items)
-        obj = joris_object_get_object_r(object, items);
-    my_arrfree((void **) items);
+    if (object) {
+        items = my_strsplit(target, ".");
+        if (items)
+            obj = joris_object_get_object_r(object, items);
+        my_arrfree((void **) items);
+    }
     return (obj);
 }
