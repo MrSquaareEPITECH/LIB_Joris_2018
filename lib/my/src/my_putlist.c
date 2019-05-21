@@ -8,8 +8,12 @@
 #include <stdlib.h>
 #include "my.h"
 
-void my_putlist(char **list)
+int my_putlist(char *const *list)
 {
-    for (int i = 0; list && (list[i] != NULL); ++i)
-        my_puts(list[i]);
+    int rvalue = 0;
+
+    if (!list)
+        return (EOF);
+    rvalue = my_fdputlist(list, STDOUT);
+    return (rvalue);
 }

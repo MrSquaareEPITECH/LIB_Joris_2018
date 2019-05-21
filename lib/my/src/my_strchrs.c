@@ -10,17 +10,17 @@
 
 char *my_strchrs(const char *str, const char *chrs)
 {
-    char *strchr = NULL;
-    int len = my_strlen(chrs);
+    char *strchrs = NULL;
     char *current = NULL;
 
-    if (str && chrs) {
-        for (int i = 0; i < len; ++i) {
-            current = my_strchr(str, chrs[i]);
-            strchr = (strchr) ? strchr : current;
-            if (current && strchr && current < strchr)
-                strchr = current;
-        }
+    if (!str || !chrs)
+        return (NULL);
+    for (int i = 0; chrs[i]; ++i) {
+        current = my_strchr(str, chrs[i]);
+        if (!strchrs)
+            strchrs = current;
+        if (current && strchrs && current < strchrs)
+            strchrs = current;
     }
-    return (strchr);
+    return (strchrs);
 }

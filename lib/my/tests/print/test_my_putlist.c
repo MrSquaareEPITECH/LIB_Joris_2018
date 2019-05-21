@@ -24,7 +24,9 @@ Test(my_putlist, list_valid, .init = cr_redirect_stdout)
 Test(my_putlist, list_invalid_crash_test, .init = cr_redirect_stdout)
 {
     char **param1 = NULL;
+    int actual = 0;
+    int expected = -1;
 
-    my_putlist(param1);
-    cr_assert_eq(0, 0);
+    actual = my_putlist(param1);
+    cr_assert_eq(actual, expected);
 }
