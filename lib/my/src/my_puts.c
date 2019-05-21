@@ -10,9 +10,10 @@
 
 int my_puts(const char *str)
 {
-    int len = my_strlen(str);
+    int rvalue = 0;
 
-    if (write(STDOUT, str, len) == -1)
+    if (!str)
         return (EOF);
-    return (0);
+    rvalue = my_fdputs(str, STDOUT);
+    return (rvalue);
 }

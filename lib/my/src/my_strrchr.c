@@ -10,13 +10,13 @@
 
 char *my_strrchr(const char *str, char chr)
 {
-    int len = my_strlen(str);
-    int i = 0;
+    int last = 0;
 
-    if (str) {
-        for (i = len - 1; (str[i] != chr) && (i >= 0); --i);
+    if (!str || !chr)
+        return (NULL);
+    last = my_strlen(str) - 1;
+    for (int i = last; i >= 0; --i)
         if (str[i] == chr)
             return ((char *) &(str[i]));
-    }
     return (NULL);
 }

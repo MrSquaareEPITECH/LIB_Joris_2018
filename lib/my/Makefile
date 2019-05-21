@@ -22,8 +22,12 @@ MAIN_SRC		=		main.c
 
 PROJ_SRC		=		src/my_arrfree.c			\
 						src/my_arrlen.c				\
+						src/my_fdputchar.c			\
+						src/my_fdputs.c				\
+						src/my_fdputlist.c			\
 						src/my_itoa.c				\
 						src/my_ltoa.c				\
+						src/my_memset.c				\
 						src/my_putchar.c			\
 						src/my_putlist.c			\
 						src/my_puts.c				\
@@ -34,16 +38,33 @@ PROJ_SRC		=		src/my_arrfree.c			\
 						src/my_strcmp.c				\
 						src/my_strcpy.c				\
 						src/my_strdup.c				\
+						src/my_strduprg.c			\
+						src/my_strextrct.c			\
 						src/my_strisd.c				\
 						src/my_strisi.c				\
 						src/my_strisl.c				\
+						src/my_strjchr.c			\
+						src/my_strjchrs.c			\
+						src/my_strjcln.c			\
+						src/my_strjsplit.c			\
+						src/my_strjssplit.c			\
+						src/my_strjstok.c			\
+						src/my_strjstr.c			\
+						src/my_strjstrs.c			\
+						src/my_strjtok.c			\
+						src/my_strjump.c			\
 						src/my_strlen.c				\
 						src/my_strmcat.c			\
+						src/my_strmcatf.c			\
 						src/my_strrchr.c			\
+						src/my_strrchrs.c			\
 						src/my_strrpl.c				\
 						src/my_strrstr.c			\
 						src/my_strsplit.c			\
+						src/my_strssplit.c			\
+						src/my_strstok.c			\
 						src/my_strstr.c				\
+						src/my_strstrs.c			\
 						src/my_strtod.c				\
 						src/my_strtoi.c				\
 						src/my_strtok.c				\
@@ -51,8 +72,12 @@ PROJ_SRC		=		src/my_arrfree.c			\
 
 TEST_SRC		=		tests/array/test_my_arrfree.c		\
 						tests/array/test_my_arrlen.c		\
+						tests/memory/test_my_memset.c		\
 						tests/number/test_my_itoa.c			\
 						tests/number/test_my_ltoa.c			\
+						tests/print/test_my_fdputchar.c		\
+						tests/print/test_my_fdputs.c		\
+						tests/print/test_my_fdputlist.c		\
 						tests/print/test_my_putchar.c		\
 						tests/print/test_my_putlist.c		\
 						tests/print/test_my_puts.c			\
@@ -63,12 +88,19 @@ TEST_SRC		=		tests/array/test_my_arrfree.c		\
 						tests/string/test_my_strcmp.c		\
 						tests/string/test_my_strcpy.c		\
 						tests/string/test_my_strdup.c		\
+						tests/string/test_my_strduprg.c		\
+						tests/string/test_my_strextrct.c	\
 						tests/string/test_my_strisd.c		\
 						tests/string/test_my_strisi.c		\
 						tests/string/test_my_strisl.c		\
+						tests/string/test_my_strjcln.c		\
+						tests/string/test_my_strjsplit.c	\
+						tests/string/test_my_strjtok.c		\
 						tests/string/test_my_strlen.c		\
 						tests/string/test_my_strmcat.c		\
+						tests/string/test_my_strmcatf.c		\
 						tests/string/test_my_strrchr.c		\
+						tests/string/test_my_strrchrs.c		\
 						tests/string/test_my_strrpl.c		\
 						tests/string/test_my_strrstr.c		\
 						tests/string/test_my_strsplit.c		\
@@ -148,8 +180,8 @@ tests_run:		CFLAGS += -fprofile-arcs -ftest-coverage
 tests_run:		LDLIBS += -lgcov -lcriterion
 tests_run:		$(PROJ_OBJ) $(TEST_OBJ)
 				$(CC) $(PROJ_OBJ) $(TEST_OBJ) -o $(TEST_NAME) $(LDFLAGS) $(LDLIBS) \
-                && echo "$(GREEN_B_COLOR)$(TEST_NAME) successfully created$(NO_COLOR)" \
-                || { echo "$(RED_B_COLOR)$(TEST_NAME) couldn't be created$(NO_COLOR)"; exit 1; }
+				&& echo "$(GREEN_B_COLOR)$(TEST_NAME) successfully created$(NO_COLOR)" \
+				|| { echo "$(RED_B_COLOR)$(TEST_NAME) couldn't be created$(NO_COLOR)"; exit 1; }
 				$(TEST_NAME) \
 				&& echo "$(GREEN_B_COLOR)Unit tests passed successfully$(NO_COLOR)" \
 				|| { echo "$(RED_B_COLOR)Unit tests did not pass successfully$(NO_COLOR)"; exit 1; }

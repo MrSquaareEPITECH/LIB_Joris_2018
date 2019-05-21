@@ -7,16 +7,16 @@
 
 #include "my.h"
 
-int my_strisl(const char *str)
+bool_t my_strisl(const char *str)
 {
-    int strisl = (str) ? 1 : 0;
-    int len = my_strlen(str);
+    bool_t strisl = 0;
     int negative = 0;
 
-    if (str) {
-        negative = (str[0] == '-') ? 1 : 0;
-        for (int i = negative; i < len; ++i)
-            strisl = IS_NBR(str[i]);
-    }
+    if (!str)
+        return (FALSE);
+    strisl = TRUE;
+    negative = (str[0] == '-') ? 1 : 0;
+    for (int i = negative; strisl && str[i]; ++i)
+        strisl &= IS_NBR(str[i]);
     return (strisl);
 }
